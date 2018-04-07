@@ -535,6 +535,94 @@ int main(int argvc, char** argv) {
 <h2>Atividade 5 - Tilt-shift em Imagem e Vídeo</h2>
 <h3>5.1 - Imagem</h3>
 <p>
+Utilizando o programa addweighted.cpp como base.<br>
+Imagem Utilizada:<br>
+<img src="\Nova pasta\bridge.jpg" alt="Um carro"style="width:35%"><br>
+Resuldado da saída do programa:<br>
+<img src="\Nova pasta\tiltshifted.jpg" alt="Um carro"style="width:35%"><br>
+Código utilizado:<br>
+<pre class="prettyprint">
+<code>
+#include &#60iostream&#62
+#include &#60opencv2/opencv.hpp&#62
+#include &#60cmath&#62
+
+using namespace cv;
+using namespace std;
+
+int pslider = 0;
+int aslider = 0;
+int dslider = 1;
+int dslidermax = 100;
+double l1, l2,alfa;
+//Criamos a mascara para o borramento da imagem
+float gauss[] = { 1,2,1,
+2,4,2,
+1,2,1 };
+
+
+void on_trackbar_a(int, void*) {
+	l1 = aslider - pslider;
+	l2 = aslider + pslider;
+}
+
+void on_trackbar_p(int, void*) {
+	l1 = aslider - pslider;
+	l2 = aslider + pslider;
+}
+
+Mat image1, image2, blended;
+
+char TrackbarName[50];
+
+int main(int argvc, char** argv) {
+	image1 = imread("C:/Users/vitor/Desktop/Faculdade/Processamento Digital de Imagens/bridge.jpg");
+	image1.copyTo(image2);
+	image2.convertTo(image2, CV_32F);
+
+	Mat mask = Mat(3, 3, CV_32F, gauss);
+	scaleAdd(mask, 1 / 16.0, Mat::zeros(3, 3, CV_32F), mask);
+	for (int i = 0; i < 10; i++) {
+		filter2D(image2, image2, image2.depth(), mask, Point(1, 1), 0);
+	}
+	image2.convertTo(image2, CV_8U);
+	cout << image1.rows << endl;
+	cout << image1.cols << endl;
+	namedWindow("addweighted", 1);
+	sprintf_s(TrackbarName, "Altura %d", image1.rows);
+	createTrackbar(TrackbarName, "addweighted",
+		&aslider,
+		image1.rows,
+		on_trackbar_a);
+	on_trackbar_a(aslider, 0);
+
+	sprintf_s(TrackbarName, "Posição %d", image1.rows);
+	createTrackbar(TrackbarName, "addweighted",
+		&pslider,
+		image1.rows,
+		on_trackbar_p);
+	on_trackbar_p(pslider, 0);
+
+	sprintf_s(TrackbarName, "Decaimento %d", dslidermax);
+	createTrackbar(TrackbarName, "addweighted",
+		&dslider,
+		dslidermax);
+
+	blended = Mat::zeros(image1.rows, image1.cols, CV_8UC3);
+	while (1) {
+		for (int i = 0; i<image1.rows; i++) {
+			double d = (double)dslider;
+			alfa = 0.5*(tanh((i - l1) / d) - tanh((i - l2) / d));
+			addWeighted(image1.row(i), alfa, image2.row(i), 1 - alfa, 0, blended.row(i));
+		}
+		imshow("addweighted", blended);
+		if (waitKey(30) == 27) break;
+	}
+	imwrite("tiltshifted.jpg", blended);
+	return 0;
+}
+</code>
+</pre>
 </p>
 <h3>5.2 - Vídeo</h3>
 <p>
