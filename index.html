@@ -610,7 +610,7 @@ int main(int argvc, char** argv) {
 
 	blended = Mat::zeros(image1.rows, image1.cols, CV_8UC3);
 	while (1) {
-		for (int i = 0; i<image1.rows; i++) {
+		for (int i = 0; i &#60 image1.rows; i++) {
 			double d = (double)dslider;
 			alfa = 0.5*(tanh((i - l1) / d) - tanh((i - l2) / d));
 			addWeighted(image1.row(i), alfa, image2.row(i), 1 - alfa, 0, blended.row(i));
