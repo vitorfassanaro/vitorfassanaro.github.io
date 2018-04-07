@@ -396,7 +396,7 @@ Código utilizado:<br>
 <pre class="prettyprint">
 <code>
 #include &#60iostream&#62
-#include &#62opencv2/opencv.hpp&#62
+#include &#60opencv2/opencv.hpp&#62
 
 using namespace cv;
 using namespace std;
@@ -404,7 +404,7 @@ using namespace std;
 void printmask(Mat &m) {
 	for (int i = 0; i<m.size().height; i++) {
 		for (int j = 0; j<m.size().width; j++) {
-			cout << m.at<float>(i, j) << ",";
+			cout << m.at&#60float&#62(i, j) << ",";
 		}
 		cout << endl;
 	}
