@@ -206,8 +206,8 @@ int main() {
 	p.y = 0;
 	// Invertemos o fundo da imagem para determinar o número de objetos com buracos
 	floodFill(image, p, 255);
-	for (int i = 0; i< height; i++) {
-		for (int j = 0; j< width; j++) {
+	for (int i = 0; i &#60 height; i++) {
+		for (int j = 0; j &#60 width; j++) {
 			if (image.at&#60uchar&#62(i, j) == 0) {
 				// achou um objeto
 				nobjc++;
