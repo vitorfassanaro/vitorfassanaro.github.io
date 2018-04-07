@@ -206,8 +206,8 @@ int main() {
 	p.y = 0;
 	// Invertemos o fundo da imagem para determinar o número de objetos com buracos
 	floodFill(image, p, 255);
-	for (int i = 0; i<height; i++) {
-		for (int j = 0; j<width; j++) {
+	for (int i = 0; i< height; i++) {
+		for (int j = 0; j< width; j++) {
 			if (image.at&#60uchar&#62(i, j) == 0) {
 				// achou um objeto
 				nobjc++;
@@ -384,8 +384,8 @@ int main(int argc, char** argv) {
 </p>
 <h2>Atividade 4 - Laplaciano do Gaussiano</h2>
 <p>
-Utilizando o programa filtroespacial.cpp como base.
-Imagem Utilizada:
+Utilizando o programa filtroespacial.cpp como base.<br>
+Imagem Utilizada:<br>
 <img src="\Nova pasta\carro2.jpg" alt="Um carro"style="width:35%"><br>
 Imagem de saída do programa com o filtro laplaciano:<br>
 <img src="\Nova pasta\laplaciano.jpg" alt="Um carro"style="width:35%"><br>
