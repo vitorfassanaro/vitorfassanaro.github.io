@@ -634,7 +634,7 @@ Utilizando os programas exemplos/dft.cpp como base.<br>
 Imagem Utilizada:<br>
 <img src="\Nova pasta\maliluminada2.jpg" alt="Uma rua"style="width:35%"><br>
 Resuldado da saída do programa:<br>
-<img src="\Nova pasta\filtradahm.jpg" alt="Uma rua"style="width:35%"><br>
+<img src="\Nova pasta\filtradahm.JPG" alt="Uma rua"style="width:35%"><br>
 Código utilizado:<br>
 <pre class="prettyprint">
 <code>
@@ -718,8 +718,8 @@ int main() {
 	int N = dft_N;
 
 	//filtro homomórfico
-	for (int i = 0; i<dft_M; i++) {
-		for (int j = 0; j<dft_N; j++) {
+	for (int i = 0; i < dft_M; i++) {
+		for (int j = 0; j < dft_N; j++) {
 			tmp.at&#60float&#62(i, j) = (gamah - gamal)*(1.0 - exp(-1.0*(float)c*((((float)i - M / 2.0)*((float)i - M / 2.0) + ((float)j - N / 2.0)*((float)j - N / 2.0)) / (D0*D0)))) + gamal;
 		}
 	}
