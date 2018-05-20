@@ -783,5 +783,134 @@ int main() {
 </code>
 </pre>
 </p>
+<h2>Atividade 7 - Canny e a arte do Pontilhismo</h2>
+<p>
+Utilizando os programas exemplos/dft.cpp como base.<br>
+
+Imagem Utilizada:<br>
+<img src="\Nova pasta\" alt=""style="width:35%"><br>
+Resuldado da saída do programa:<br>
+<img src="\Nova pasta\" alt=""style="width:35%"><br>
+Código utilizado:<br>
+<pre class="prettyprint">
+<code>
+</code>
+</pre>
+</p>
+<h2>Atividade 8 - Kmeans clustering</h2>
+<p>
+O agrupamento k-means (k-means clustering) é um método de agrupamento que visa dividir n
+observações em k grupos, no caso do programa utilizado ele agrupa os pixels da imagens em k 
+cores (k grupos) diferentes; com o uso do parâmetro KMEANS_RANDOM_CENTERS no lugar do 
+KMEANS_PP_CENTERS os k grupos são escolhidos aleatoriamente, fazendo várias rodadas 
+podemos ver que a imagem de saída pode variar por causa dos agrupamentos feitos com cores diferentes.
+
+Utilizando os programas  como base.<br>
+
+Imagem Utilizada:<br>
+<img src="\Nova pasta\paisagem.jpg" alt="Uma montanha"style="width:35%"><br>
+Resuldado da saída do programa juntos num gif:<br>
+<img src="\Nova pasta\clusteredf.gif" alt="Uma montanha"style="width:35%"><br>
+Código utilizado:<br>
+<pre class="prettyprint">
+<code>
+#include &#60opencv2/opencv.hpp&#62
+#include &#60cstdlib&#62
+#include &#60iostream&#62
+
+using namespace std;
+using namespace cv;
+
+int main() {
+	int nClusters = 6;
+	Mat rotulos;
+	int nRodadas = 1;
+	Mat centros;
+
+	Mat img = imread("C:/Users/vitor/Desktop/Faculdade/Processamento Digital de Imagens/paisagem.jpg", CV_LOAD_IMAGE_COLOR);
+	Mat samples(img.rows * img.cols, 3, CV_32F);
+
+	for (int i = 0; i < 10; i++) {
+		for (int y = 0; y < img.rows; y++) {
+			for (int x = 0; x < img.cols; x++) {
+				for (int z = 0; z < 3; z++) {
+					samples.at&#60float&#62(y + x * img.rows, z) = img.at<Vec3b>(y, x)[z];
+				}
+			}
+		}
+		kmeans(samples,
+			nClusters,
+			rotulos,
+			TermCriteria(CV_TERMCRIT_ITER | CV_TERMCRIT_EPS, 10000, 0.0001),
+			nRodadas,
+			KMEANS_RANDOM_CENTERS,
+			centros);
+
+
+		Mat rotulada(img.size(), img.type());
+		for (int y = 0; y < img.rows; y++) {
+			for (int x = 0; x < img.cols; x++) {
+				int indice = rotulos.at<int>(y + x * img.rows, 0);
+				rotulada.at&#60Vec3b&#62(y, x)[0] = (uchar)centros.at&#60float&#62(indice, 0);
+				rotulada.at&#60Vec3b&#62(y, x)[1] = (uchar)centros.at&#60float&#62(indice, 1);
+				rotulada.at&#60Vec3b&#62(y, x)[2] = (uchar)centros.at&#60float&#62(indice, 2);
+			}
+		}
+		//Aqui salvamos as imagens para o gif
+		if (i == 0) {
+			imshow("clustered image", rotulada);
+			imwrite("clutered1.jpeg", rotulada);
+		//	waitKey(0);
+		}
+		if (i == 1) {
+			imshow("clustered image", rotulada);
+			imwrite("clutered2.jpeg", rotulada);
+		//	waitKey(0);
+		}
+		if (i == 2) {
+			imshow("clustered image", rotulada);
+			imwrite("clutered3.jpeg", rotulada);
+		//	waitKey(0);
+		}
+		if (i == 3) {
+			imshow("clustered image", rotulada);
+			imwrite("clutered4.jpeg", rotulada);
+		//	waitKey(0);
+		}
+		if (i == 4) {
+			imshow("clustered image", rotulada);
+			imwrite("clutered5.jpeg", rotulada);
+		//	waitKey(0);
+		}
+		if (i == 5) {
+			imshow("clustered image", rotulada);
+			imwrite("clutered6.jpeg", rotulada);
+		//	waitKey(0);
+		}
+		if (i == 6) {
+			imshow("clustered image", rotulada);
+			imwrite("clutered7.jpeg", rotulada);
+		//	waitKey(0);
+		}
+		if (i == 7) {
+			imshow("clustered image", rotulada);
+			imwrite("clutered8.jpeg", rotulada);
+		//	waitKey(0);
+		}
+		if (i == 8) {
+			imshow("clustered image", rotulada);
+			imwrite("clutered9.jpeg", rotulada);
+		//	waitKey(0);
+		}
+		if (i == 9) {
+			imshow("clustered image", rotulada);
+			imwrite("clutered10.jpeg", rotulada);
+		//	waitKey(0);
+		}
+	}
+}
+</code>
+</pre>
+</p>
 </body>
 </html>
