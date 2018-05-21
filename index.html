@@ -833,11 +833,11 @@ int main(){
   iota(xrange.begin(), xrange.end(), 0);
   iota(yrange.begin(), yrange.end(), 0);
 
-  for(uint i = 0; i < xrange.size(); i++){
+  for(uint i = 0; i &#60 xrange.size(); i++){
     xrange[i]= xrange[i]*STEP+STEP/2;
   }
 
-  for(uint i = 0; i < yrange.size(); i++){
+  for(uint i = 0; i &#60 yrange.size(); i++){
     yrange[i]= yrange[i]*STEP+STEP/2;
   }
 
