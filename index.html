@@ -847,7 +847,7 @@ Código utilizado:<br>
     for(auto j : yrange){
       x = i+rand()%(2*JITTER)-JITTER+1;
       y = j+rand()%(2*JITTER)-JITTER+1;
-      gray = Original.at<uchar>(x,y);
+      gray = Original.at&#60uchar&#62(x,y);
       circle(Pontilhismo, cv::Point(y,x), RAIO, CV_RGB(gray,gray,gray), -1, CV_AA);
     }
   }
@@ -856,12 +856,12 @@ Código utilizado:<br>
   imwrite("imagemComPontilhismo.jpg", Pontilhismo);
 
    //Aplica Canny
-   for(int z=0; z < 5; z++){
+   for(int z=0; z &#60 5; z++){
      Canny(Original, borderOriginalImage, 10*z, 50*z);
      int raio = 10-z;
 
-     for(int i=0; i < height; i++ ){
-        for(int j=0; j < width; j++){
+     for(int i=0; i &#60 height; i++ ){
+        for(int j=0; j &#60 width; j++){
            if(borderOriginalImage.at&#60uchar&#62(i,j) == 255){
               gray = Original.at&#60uchar&#62(i,j);
               circle(Pontilhismo, cv::Point(j,i), raio, CV_RGB(gray,gray,gray), -1, CV_AA);
