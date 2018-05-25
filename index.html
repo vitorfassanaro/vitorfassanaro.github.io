@@ -856,12 +856,12 @@ Código utilizado:<br>
   imwrite("imagemComPontilhismo.jpg", Pontilhismo);
 
    //Aplica Canny
-   for(int z=0; z&#605; z++){
+   for(int z=0; z < 5; z++){
      Canny(Original, borderOriginalImage, 10*z, 50*z);
      int raio = 10-z;
 
-     for(int i=0; i<height; i++ ){
-        for(int j=0; j<width; j++){
+     for(int i=0; i < height; i++ ){
+        for(int j=0; j < width; j++){
            if(borderOriginalImage.at&#60uchar&#62(i,j) == 255){
               gray = Original.at&#60uchar&#62(i,j);
               circle(Pontilhismo, cv::Point(j,i), raio, CV_RGB(gray,gray,gray), -1, CV_AA);
